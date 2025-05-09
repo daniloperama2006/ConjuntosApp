@@ -1,7 +1,3 @@
-<?php
-// index.php
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conjunto Residencial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .card-img-top {
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+      }
+    </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img width="75" height="75" src="https://img.icons8.com/bubbles/100/building.png" alt="building"/>            
+                <img width="75" height="75" src="https://img.icons8.com/bubbles/100/building.png" alt="building"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,7 +45,6 @@
         </div>
     </nav>
 
-    <!-- Sección hero -->
     <section class="bg-primary text-white text-center py-5">
         <div class="container">
             <h1 class="display-4">Bienvenido al Conjunto Residencial</h1>
@@ -51,7 +53,6 @@
         </div>
     </section>
 
-    <!-- Modal para autenticación -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,12 +77,11 @@
         </div>
     </div>
 
-    <!-- Contenido adicional -->
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Servicios">
+                    <img src="./img/servicios.jpg"  class="card-img-top" alt="Servicios">
                     <div class="card-body">
                         <h5 class="card-title">Servicios</h5>
                         <p class="card-text">Descubre todos los servicios que ofrecemos para mejorar tu calidad de vida.</p>
@@ -91,7 +91,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Eventos">
+                    <img src="./img/eventos.jpeg" class="card-img-top" alt="Eventos">
                     <div class="card-body">
                         <h5 class="card-title">Próximos eventos</h5>
                         <p class="card-text">Infórmate sobre los eventos sociales y actividades en el conjunto residencial.</p>
@@ -101,7 +101,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Noticias">
+                    <img src="./img/noticias.jpg" class="card-img-top" alt="Noticias">
                     <div class="card-body">
                         <h5 class="card-title">Últimas noticias</h5>
                         <p class="card-text">Mantente al tanto de las últimas noticias sobre el conjunto residencial.</p>
@@ -112,12 +112,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4 mt-5">
         <p>&copy; 2025 Conjunto Residencial. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Enlace a los scripts de Bootstrap (sin js adicional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0O6BIIp1pCs8M8vxa6K2oG6a0xw45Pbz5WqF22tGb6f2U93g" crossorigin="anonymous"></script>
 </body>
 </html>
