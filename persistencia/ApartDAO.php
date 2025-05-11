@@ -18,6 +18,13 @@ class ApartDAO{
                 where a.id_propietario = 3";
     }
 
+
+    public function consultarPorNumeroYBloque() {
+    return "SELECT id_apartamento, numero, bloque, id_propietario 
+            FROM apartamento 
+            WHERE numero = " . $this->numero . " AND bloque = " . $this->bloque;
+}
+
 }
 
 ?>

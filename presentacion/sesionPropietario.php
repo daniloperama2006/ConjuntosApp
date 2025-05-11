@@ -30,11 +30,6 @@
 
     <main class="container my-5">
 
-    <!-- Filtro de Cuentas -->
-    <div class="d-flex justify-content-end mb-3">
-      <button id="btnPropPendientes" class="btn btn-outline-dark me-2">Pendientes</button>
-      <button id="btnPropPagadas"   class="btn btn-outline-dark">Pagadas</button>
-    </div>
 
     <!-- Tabla de Cuentas de Cobro -->
     <div class="card shadow-sm">

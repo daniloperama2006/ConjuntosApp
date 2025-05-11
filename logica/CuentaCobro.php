@@ -11,7 +11,7 @@ class CuentaCobro {
 
     public function __construct(
         $id = 0,
-        $apartamento = 0,
+        $apartamento = "",
         $estado = "",
         $fechaGeneracion = "",
         $valor = 0.00,
@@ -52,7 +52,7 @@ class CuentaCobro {
     public function pagar() {
         $conexion = new Conexion();
         $conexion->abrir();
-        $conexion->ejecutar("UPDATE cuenta_cobro SET id_estado = 2 WHERE id_cuenta = " . $this->id);
+        $conexion->ejecutar("update cuenta_cobro SET id_estado = 2 WHERE id_cuenta = " . $this->id);
         $conexion->cerrar();
     }
 
@@ -110,6 +110,9 @@ class CuentaCobro {
     $conexion->cerrar();
     return $cuentas;
     }
+
+
+
 }
 
 ?>

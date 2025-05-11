@@ -39,13 +39,32 @@
                     <h5 class="mb-0">Generar Nueva Cuenta de Cobro</h5>
                 </div>
                 <div class="card-body">
-                    <form id="formGenerarCobro" method="post" action="procesar_cuenta.php">
-                        <div class="mb-3">
+                    <form id="formGenerarCobro" method="post" action="index.php?pid=<?php echo base64_encode("presentacion/procesarCuenta.php"); ?>">
+                    <?php if (isset($_GET['mensaje'])) { ?>
+                        <div class="container mt-4">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo htmlspecialchars($_GET['mensaje']); ?>
+                            </div>
+                        </div>
+                    <?php } elseif (isset($_GET['error'])) { ?>
+                        <div class="container mt-4">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?php echo htmlspecialchars($_GET['error']); ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+    
+                    <div class="mb-3">
                             <label for="selectApartamento" class="form-label">Apartamento</label>
-                            <select id="selectApartamento" name="apartamento" class="form-select">
-                                <option value="">-- Selecciona apartamento --</option>
-                                <!-- Aquí puedes cargar los apartamentos disponibles -->
-                            </select>
+                            <div class="mb-3">
+                                <label for="inputNumero" class="form-label">Número de Apartamento</label>
+                                <input id="inputNumero" name="numero" type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputBloque" class="form-label">Bloque</label>
+                                <input id="inputBloque" name="bloque" type="text" class="form-control" required>
+                            </div>
+
                         </div>
                         <div class="mb-3">
                             <label for="inputFecha" class="form-label">Fecha de Generación</label>

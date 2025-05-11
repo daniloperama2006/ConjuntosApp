@@ -16,13 +16,13 @@ class CobroDAO{
         $this -> idAdministrador = $idAdministrador;
     }
 
-    public function insertarCuentaCobro(){
+    public function insertarCuentaCobro() {
         return "
-        insert into Cuenta_cobro
-        (id_apartamento, id_estado, fecha_generacion, valor, id_administrador)
-        VALUES ({$this->idApartamento}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->idAdministrador})
+            INSERT INTO Cuenta_cobro (id_apartamento, id_estado, fecha_generacion, valor, id_administrador)
+            VALUES ({$this->idApartamento}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->idAdministrador})
         ";
     }
+
 
     public function cambiarEstadoCuenta($idCuenta, $nuevoEstado) {
         return "update Cuenta_cobro SET id_estado = {$nuevoEstado} WHERE id_cuenta = {$idCuenta}";
@@ -61,5 +61,7 @@ class CobroDAO{
             u.apellido, u.nombre, a.numero;
         ";
     }
+
+
 }
 ?>
