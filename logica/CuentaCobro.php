@@ -1,26 +1,25 @@
 <?php
-
+require_once __DIR__ . "/../persistencia/CobroDAO.php";
+require_once __DIR__ . "/../persistencia/conexion.php";
 class CuentaCobro {
     private $id;
-    private $idApartamento;
-    private $idEstado;
+    private $apartamento;
+    private $estado;
     private $fechaGeneracion;
     private $valor;
     private $idAdministrador;
-    private $creadoEn;
-    private $actualizadoEn;
 
     public function __construct(
         $id = 0,
-        $idApartamento = 0,
-        $idEstado = 0,
+        $apartamento = 0,
+        $estado = "",
         $fechaGeneracion = "",
         $valor = 0.00,
         $idAdministrador = 0
     ) {
         $this->id = $id;
-        $this->idApartamento = $idApartamento;
-        $this->idEstado = $idEstado;
+        $this->apartamento = $apartamento;
+        $this->estado = $estado;
         $this->fechaGeneracion = $fechaGeneracion;
         $this->valor = $valor;
         $this->idAdministrador = $idAdministrador;
@@ -30,12 +29,12 @@ class CuentaCobro {
         return $this->id;
     }
 
-    public function getIdApartamento() {
-        return $this->idApartamento;
+    public function getApartamento() {
+        return $this->apartamento;
     }
 
-    public function getIdEstado() {
-        return $this->idEstado;
+    public function getEstado() {
+        return $this->estado;
     }
 
     public function getFechaGeneracion() {
@@ -50,14 +49,67 @@ class CuentaCobro {
         return $this->idAdministrador;
     }
 
-    public function getCreadoEn() {
-        return $this->creadoEn;
+    public function pagar() {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $conexion->ejecutar("UPDATE cuenta_cobro SET id_estado = 2 WHERE id_cuenta = " . $this->id);
+        $conexion->cerrar();
     }
 
-    public function getActualizadoEn() {
-        return $this->actualizadoEn;
+    public function consultarPorEstado($estadoId) {
+        $conexion = new Conexion();
+        $cuentaDAO = new CobroDAO();
+        $conexion->abrir();
+
+        $conexion->ejecutar($cuentaDAO->consultarCuentasPorEstado($estadoId));
+
+        $cuentas = array();
+        while (($datos = $conexion->registro()) != null) {
+            $apartamento = new Apartamento($datos[1], $datos[2], $datos[3]); 
+            $estado = new Estado(0, $datos[7]);
+            $cuenta = new CuentaCobro(
+                $datos[0],         
+                $apartamento,      
+                $estado,          
+                $datos[5],        
+                $datos[6],         
+                $datos[4]          
+            );
+
+            array_push($cuentas, $cuenta);
+        }
+
+        $conexion->cerrar();
+        return $cuentas;
     }
 
+
+    public function consultarPorPropietario($idPropietario) {
+    $conexion = new Conexion();
+    $cuentaDAO = new CobroDAO();
+    $conexion->abrir();
+
+    $conexion->ejecutar($cuentaDAO->consultarCuentasPorPropietario($idPropietario));
+
+    $cuentas = array();
+    while (($datos = $conexion->registro()) != null) {
+            $apartamento = new Apartamento($datos[1], $datos[2], $datos[3]); 
+            $estado = new Estado(0, $datos[7]);
+            $cuenta = new CuentaCobro(
+                $datos[0],         
+                $apartamento,      
+                $estado,          
+                $datos[5],        
+                $datos[6],         
+                $datos[4]          
+            );
+
+            array_push($cuentas, $cuenta);
+        }
+
+    $conexion->cerrar();
+    return $cuentas;
+    }
 }
 
 ?>

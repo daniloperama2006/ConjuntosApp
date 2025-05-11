@@ -1,34 +1,32 @@
 <?php
 
 class Apartamento {
-    private $id_apartamento;
-    private $numero_int;
-    private $bloque_int;
-    private $id_propietario_int;
-    private $created_at_DATETIME;
-    private $updated_at_DATETIME;
+    private $idApartamento;
+    private $numero;
+    private $bloque;
+    private $propietario;
 
-    public function __construct($id_apartamento = 0,$numero_int = 0,$bloque_int = 0,$id_propietario_int = 0) {
-        $this->id_apartamento = $id_apartamento;
-        $this->numero_int = $numero_int;
-        $this->bloque_int = $bloque_int;
-        $this->id_propietario_int = $id_propietario_int;
+    public function __construct($idApartamento = 0,$numero = 0,$bloque = 0,$propietario = 0) {
+        $this->idApartamento = $idApartamento;
+        $this->numero= $numero;
+        $this->bloque = $bloque;
+        $this->propietario = $propietario;
     }
 
     public function getIdApartamento(){
-        return $this->id_apartamento;
+        return $this->idApartamento;
     }
 
-    public function getNumeroInt(){
-        return $this->numero_int;
+    public function getNumero(){
+        return $this->numero;
     }
 
     public function getBloqueInt(){
-        return $this->bloque_int;
+        return $this->bloque;
     }
 
-    public function getIdPropietarioInt(){
-        return $this->id_propietario_int;
+    public function getPropietario(){
+        return $this->propietario;
     }
 
 
