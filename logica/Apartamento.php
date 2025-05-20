@@ -3,13 +3,11 @@
 class Apartamento {
     private $idApartamento;
     private $numero;
-    private $bloque;
     private $propietario;
 
     public function __construct($idApartamento = 0,$numero = 0,$bloque = 0,$propietario = 0) {
         $this->idApartamento = $idApartamento;
         $this->numero= $numero;
-        $this->bloque = $bloque;
         $this->propietario = $propietario;
     }
 
@@ -21,29 +19,24 @@ class Apartamento {
         return $this->numero;
     }
 
-    public function getBloqueInt(){
-        return $this->bloque;
-    }
-
     public function getPropietario(){
         return $this->propietario;
     }
 
 
-    public function consultarPorNumeroYBloque() {
+    public function consultarPorNumero() {
     require_once 'persistencia/Conexion.php';
     require_once 'persistencia/ApartDAO.php';
 
-    $dao = new ApartDAO(0, $this->numero, $this->bloque);
+    $dao = new ApartDAO(0, $this->numero);
     $conexion = new Conexion();
     $conexion->abrir();
-    $resultado = $conexion->ejecutar($dao->consultarPorNumeroYBloque());
+    $resultado = $conexion->ejecutar($dao->consultarPorNumero());
 
     if ($registro = $conexion->registro($resultado)) {
         $this->idApartamento = $registro[0];
         $this->numero = $registro[1];
-        $this->bloque = $registro[2];
-        $this->propietario = $registro[3];
+        $this->propietario = $registro[2];
         $conexion->cerrar();
         return true;
     } else {

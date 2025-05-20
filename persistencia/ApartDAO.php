@@ -13,16 +13,16 @@ class ApartDAO{
     }
 
     public function consultarPorPropietario($idPropietario){
-        return "select a.id_apartamento , a.numero, a.bloque, a.id_propietario, u.nombre, u.apellido
-                from apartamento a join usuario u on (a.id_propietario = u.id_usuario)
+        return "select a.id_apartamento , a.numero, a.id_propietario, u.nombre, u.apellido
+                from apartamento a join propietario u on (a.id_propietario = u.id_usuario)
                 where a.id_propietario = 3";
     }
 
 
-    public function consultarPorNumeroYBloque() {
-    return "SELECT id_apartamento, numero, bloque, id_propietario 
+    public function consultarPorNumero() {
+    return "SELECT id_apartamento, numero, id_propietario 
             FROM apartamento 
-            WHERE numero = " . $this->numero . " AND bloque = " . $this->bloque;
+            WHERE numero = " . $this->numero;
 }
 
 }

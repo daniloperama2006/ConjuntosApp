@@ -4,8 +4,8 @@ require ("logica/Apartamento.php");
 require ("logica/CuentaCobro.php");
 require ("logica/Estado.php");
 require ("logica/Pago.php");
-require ("logica/Rol.php");
-require ("logica/Usuario.php");
+require ("logica/Propietario.php");
+require ("logica/Admin.php");
 ?>
 
 <!DOCTYPE html>

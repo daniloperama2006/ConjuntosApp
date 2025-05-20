@@ -13,7 +13,7 @@
             <p class="text-white">
                 <?php
                 $id = $_SESSION["id"];
-                $admin = new Usuario($id);
+                $admin = new Admin($id);
                 $admin->consultar();
                 echo "Admin: " . $admin->getNombre() . " " . $admin->getApellido();
                 ?>
@@ -59,11 +59,7 @@
                             <div class="mb-3">
                                 <label for="inputNumero" class="form-label">Número de Apartamento</label>
                                 <input id="inputNumero" name="numero" type="text" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputBloque" class="form-label">Bloque</label>
-                                <input id="inputBloque" name="bloque" type="text" class="form-control" required>
-                            </div>
+                            </div>                        
 
                         </div>
                         <div class="mb-3">

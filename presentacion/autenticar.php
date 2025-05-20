@@ -1,42 +1,35 @@
 <?php
-define("ROL_ADMIN",       "1");
-define("ROL_PROPIETARIO", "2");
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . "/../logica/Usuario.php";
+require_once __DIR__ . "/../logica/Propietario.php";
+require_once __DIR__ . "/../logica/Admin.php";
 require_once __DIR__ . "/../persistencia/Conexion.php";
 
-
-if(isset($_POST["autenticar"])){
+if (isset($_POST["autenticar"])) {
     $correo = $_POST["correo"];
     $clave = $_POST["clave"];
-
-    $usuario = new Usuario("", "", "", $correo, $clave); 
-
-    if($usuario -> autenticar()){
-        $_SESSION["id"] = $usuario -> getIdUsuario();
-        $_SESSION["rol"] = $usuario -> getIdRol(); 
-
-        if($_SESSION["rol"] == ROL_ADMIN){
-            header("Location: ?pid=" . base64_encode("presentacion/sesionAdmin.php"));
-            exit();
-        } elseif($_SESSION["rol"] == ROL_PROPIETARIO){
-            header("Location: ?pid=" . base64_encode("presentacion/sesionPropietario.php"));
-            exit();
-        } else {
-            echo "Error: Rol de usuario desconocido.";
-        }
+    
+    $propietario = new Propietario("", "", "", $correo, $clave);
+    $admin = new Admin("", "", "", $correo, $clave);
+    
+    if ($propietario->autenticar()) {
+        $_SESSION["id"] = $propietario->getId();
+        $_SESSION["rol"] = "propietario";
+        header("Location: ?pid=" . base64_encode("presentacion/sesionPropietario.php"));
+        exit();
+    } elseif ($admin->autenticar()) {
+        $_SESSION["id"] = $admin->getId();
+        $_SESSION["rol"] = "admin";
+        header("Location: ?pid=" . base64_encode("presentacion/sesionAdmin.php"));
+        exit();
     } else {
         echo "Error: Credenciales incorrectas.";
     }
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
