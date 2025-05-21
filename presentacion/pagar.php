@@ -51,6 +51,10 @@ if (isset($_GET['idCuenta'])) {
 ?>
 
 <section class="container my-5">
+	<div class="mt-4">
+                    <a href='presentacion/sesionPropietario.php' class="btn btn-secondary">Volver, NO sirve el boton jajsk</a>
+    </div>
+    </br>
     <div class="card shadow-sm">
         <div class="card-header bg-light">
             <h5 class="mb-0">Realizar Pago</h5>

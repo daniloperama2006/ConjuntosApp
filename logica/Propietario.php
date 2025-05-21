@@ -1,7 +1,7 @@
 <?php
-require ("persistencia/PropietarioDAO.php");
-require_once __DIR__ . "/../persistencia/Conexion.php";
-require ("logica/Persona.php");
+require_once ("persistencia/PropietarioDAO.php");
+require_once("persistencia/Conexion.php");
+require_once ("logica/Persona.php");
 class Propietario extends Persona{
     
 
@@ -15,8 +15,7 @@ class Propietario extends Persona{
         $conexion -> abrir();
         $conexion -> ejecutar($PropietarioDAO -> autenticar());
         if($conexion -> filas() == 1){            
-            $resultado = $conexion -> registro();
-            $id = $resultado[0];
+            $this -> id = $conexion -> registro()[0];
             $conexion->cerrar();
             return true;
         }else{
@@ -24,7 +23,7 @@ class Propietario extends Persona{
             return false;
         }
     }
-
+    
     public function consultar(){
         $conexion = new Conexion();
         $PropietarioDAO = new PropietarioDAO($this -> id);

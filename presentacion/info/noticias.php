@@ -1,4 +1,7 @@
 <div class="container my-5">
+<div class="container my-2">
+                <a href="?pid=<?php echo base64_encode("presentacion/inicio.php")?>"><button type="button" class="btn btn-secondary">Regresar</button> </a>
+            </div>
   <h2 class="text-center mb-4">Últimas Noticias</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">

@@ -19,6 +19,7 @@ class PagoDAO {
         VALUES ({$this->idCuenta}, '{$this->fechaPago}', {$this->montoPagado})
         ";
     }
+    
 
     // Consultar pagos por cuenta (útil para propietario o admin)
     public function consultarPagosPorCuenta() {

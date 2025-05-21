@@ -39,11 +39,26 @@ if (isset($_POST["autenticar"])) {
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">…</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img width="60" height="60" src="https://img.icons8.com/ios-filled/100/ffffff/city-buildings.png" alt="Conjunto Residencial"/>
+            </a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+        </div>
+    </nav>
+    
 
     <div class="container my-5">
       <div class="row justify-content-center">
         <div class="col-4">
+        	<div class="container my-2">
+                <a href="?pid=<?php echo base64_encode("presentacion/inicio.php")?>"><button type="button" class="btn btn-secondary">Regresar</button> </a>
+            </div>
           <div class="card">
             <div class="card-header bg-primary"><h4>Autenticar</h4></div>
             <div class="card-body">
