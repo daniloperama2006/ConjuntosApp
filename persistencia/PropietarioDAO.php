@@ -1,12 +1,11 @@
-<?php 
-
-class PropietarioDAO{
-    private $idUsuario;
+<?php
+class PropietarioDAO {
+    private $id;
     private $nombre;
     private $apellido;
     private $correo;
     private $clave;
-
+    
     public function __construct($id = 0, $nombre = "", $apellido = "", $correo = "", $clave = "") {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -14,19 +13,36 @@ class PropietarioDAO{
         $this->correo = $correo;
         $this->clave = $clave;
     }
-
-    public function autenticar(){
-        return "select id
-                from Propietario
-                where correo = '" . $this -> correo . "' and clave = '" . md5($this -> clave) . "'";
+    
+    public function insertar() {
+        return "INSERT INTO propietario (nombre, apellido, correo, clave)
+            VALUES ('$this->nombre', '$this->apellido', '$this->correo', '" . md5($this->clave) . "')";
     }
     
-    public function consultar(){
-        return "select nombre, apellido, correo
-                from Propietario
-                where id = '" . $this -> id . "'";
+    public function actualizar() {
+        return "UPDATE propietario
+            SET nombre = '$this->nombre', apellido = '$this->apellido', correo = '$this->correo'
+            WHERE id = $this->id";
+    }
+    
+    public function eliminar() {
+        return "DELETE FROM propietario WHERE id = $this->id";
+    }
+    
+    public function consultarTodos() {
+        return "SELECT id, nombre, apellido, correo FROM propietario";
+    }
+    
+    public function consultar() {
+        return "SELECT nombre, apellido, correo
+                FROM propietario
+                WHERE id = $this->id";
     }
 
-} 
-
+    public function autenticar() {
+        return "SELECT id
+                FROM propietario
+                WHERE correo = '$this->correo' AND clave = '" . md5($this->clave) . "'";
+    }
+}
 ?>

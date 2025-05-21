@@ -17,12 +17,12 @@ if (isset($_POST["autenticar"])) {
     if ($propietario->autenticar()) {
         $_SESSION["id"] = $propietario->getId();
         $_SESSION["rol"] = "propietario";
-        header("Location: ?pid=" . base64_encode("presentacion/sesionPropietario.php"));
+        header("Location: ?pid=" . base64_encode("presentacion/propietario/sesionPropietario.php"));
         exit();
     } elseif ($admin->autenticar()) {
         $_SESSION["id"] = $admin->getId();
         $_SESSION["rol"] = "admin";
-        header("Location: ?pid=" . base64_encode("presentacion/sesionAdmin.php"));
+        header("Location: ?pid=" . base64_encode("presentacion/admin/inicioAdmin.php"));
         exit();
     } else {
         echo "Error: Credenciales incorrectas.";
@@ -42,7 +42,7 @@ if (isset($_POST["autenticar"])) {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img width="60" height="60" src="https://img.icons8.com/ios-filled/100/ffffff/city-buildings.png" alt="Conjunto Residencial"/>
+                <img width="55" height="55" src="https://img.icons8.com/ios-filled/100/ffffff/city-buildings.png" alt="Conjunto Residencial"/>
             </a>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

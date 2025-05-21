@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $idAdmin = $_SESSION["id"];
     
     if (empty($numero) || empty($fecha) || empty($valor) || !$idAdmin) {
-        header("Location: index.php?pid=" . base64_encode("presentacion/sesionAdmin.php") . "&error=Datos incompletos o sesión inválida");
+        header("Location: index.php?pid=" . base64_encode("presentacion/admin/crearCuenta.php") . "&error=Datos incompletos o sesión inválida");
         exit();
     }
     
@@ -40,13 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo $cobroDAO->insertarCuentaCobro();
             
             $conexion->cerrar();
-            header("Location: index.php?pid=" . base64_encode("presentacion/sesionAdmin.php") . "&mensaje=Cuenta creada correctamente");
+            header("Location: index.php?pid=" . base64_encode("presentacion/admin/crearCuenta.php") . "&mensaje=Cuenta creada correctamente");
         } catch (Exception $e) {
             $conexion->cerrar();
-            header("Location: index.php?pid=" . base64_encode("presentacion/sesionAdmin.php") . "&error=Error al crear la cuenta");
+            header("Location: index.php?pid=" . base64_encode("presentacion/admin/crearCuenta.php") . "&error=Error al crear la cuenta");
         }
     } else {
-        header("Location: index.php?pid=" . base64_encode("presentacion/sesionAdmin.php") . "&error=El apartamento no existe");
+        header("Location: index.php?pid=" . base64_encode("presentacion/admin/crearCuenta.php") . "&error=El apartamento no existe");
     }
     exit();
 }
