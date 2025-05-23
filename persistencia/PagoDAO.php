@@ -15,7 +15,7 @@ class PagoDAO {
     // Insertar un nuevo pago
     public function insertarPago() {
         return "
-        INSERT INTO Pago (id_cuenta, fecha_pago, monto_pagado)
+        INSERT INTO pago (id_cuenta, fecha_pago, monto_pagado)
         VALUES ({$this->idCuenta}, '{$this->fechaPago}', {$this->montoPagado})
         ";
     }
@@ -28,9 +28,9 @@ class PagoDAO {
             p.id_pago, p.id_cuenta, p.fecha_pago, p.monto_pagado,
             u.nombre AS nombre_propietario, u.apellido, a.numero AS numero_apartamento
         FROM 
-            Pago p JOIN Cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
-                   JOIN Apartamento a ON cc.id_apartamento = a.id_apartamento
-                   JOIN Usuario u ON a.id_propietario = u.id_usuario
+            pago p JOIN cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
+                   JOIN apartamento a ON cc.id_apartamento = a.id_apartamento
+                   JOIN usuario u ON a.id_propietario = u.id_usuario
         WHERE 
             p.id_cuenta = {$this->idCuenta}
         ";
@@ -43,10 +43,10 @@ class PagoDAO {
             p.id_pago, p.id_cuenta, p.fecha_pago, p.monto_pagado,
             cc.valor, e.nombre_estado, a.numero AS numero_apartamento
         FROM 
-            Pago p JOIN Cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
-                   JOIN Apartamento a ON cc.id_apartamento = a.id_apartamento
-                   JOIN Usuario u ON a.id_propietario = u.id_usuario
-                   JOIN Estado e ON cc.id_estado = e.id_estado
+            pago p JOIN cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
+                   JOIN apartamento a ON cc.id_apartamento = a.id_apartamento
+                   JOIN usuario u ON a.id_propietario = u.id_usuario
+                   JOIN estado e ON cc.id_estado = e.id_estado
         WHERE 
             u.id_usuario = {$idUsuario}
         ";

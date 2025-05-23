@@ -18,14 +18,14 @@ class CobroDAO {
     
     public function insertarCuentaCobro() {
         return "
-            INSERT INTO Cuenta_cobro (id_apartamento, id_estado, fecha_generacion, valor, id_admin)
+            INSERT INTO cuenta_cobro (id_apartamento, id_estado, fecha_generacion, valor, id_admin)
             VALUES ({$this->idApartamento}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->idAdministrador})
         ";
     }
     
     public function cambiarEstadoCuenta($idCuenta, $nuevoEstado) {
         return "
-            UPDATE Cuenta_cobro
+            UPDATE cuenta_cobro
             SET id_estado = {$nuevoEstado}
             WHERE id_cuenta = {$idCuenta}
         ";
@@ -38,10 +38,10 @@ class CobroDAO {
                 u.apellido AS apellido_propietario, cc.fecha_generacion, cc.valor,
                 e.nombre_estado AS estado_cuenta
             FROM
-                Cuenta_cobro cc
-                JOIN Apartamento a ON cc.id_apartamento = a.id_apartamento
-                JOIN Propietario u ON a.id_propietario = u.id
-                JOIN Estado e ON cc.id_estado = e.id_estado
+                cuenta_cobro cc
+                JOIN apartamento a ON cc.id_apartamento = a.id_apartamento
+                JOIN propietario u ON a.id_propietario = u.id
+                JOIN estado e ON cc.id_estado = e.id_estado
             WHERE
                 e.id_estado = {$idEstado}
             ORDER BY
@@ -56,10 +56,10 @@ class CobroDAO {
                 u.apellido AS apellido_propietario, cc.fecha_generacion, cc.valor,
                 e.nombre_estado AS estado_cuenta
             FROM
-                Cuenta_cobro cc
-                JOIN Apartamento a ON cc.id_apartamento = a.id_apartamento
-                JOIN Propietario u ON a.id_propietario = u.id
-                JOIN Estado e ON cc.id_estado = e.id_estado
+                cuenta_cobro cc
+                JOIN apartamento a ON cc.id_apartamento = a.id_apartamento
+                JOIN propietario u ON a.id_propietario = u.id
+                JOIN estado e ON cc.id_estado = e.id_estado
             WHERE
                 u.id = {$idPropietario}
             ORDER BY
