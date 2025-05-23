@@ -1,5 +1,19 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once("logica/Propietario.php");
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['correo']) && !empty($_POST['clave'])) {
+        $msg = "Propietario creado con éxito.";
+    }
+}
+?>
+
 <body class="bg-light">
-	<?php include("presentacion/encabezadoAdmin.php")?>
+	<?php include("presentacion/encabezadoAdmin.php");	?>
 </body>
 
 <main class="container my-5">
@@ -30,13 +44,13 @@
             </form>
         </div>
     </div>
+   
     
-    <?php
-    if (isset($_GET['mensaje'])) {
-        $mensaje = htmlspecialchars($_GET['mensaje']);
-        $clase = strpos($mensaje, "Error") !== false ? "danger" : "success";
-        echo "<div class='alert alert-{$clase} mt-4'>{$mensaje}</div>";
-    }
-    ?>
+    <?php if (isset($msg)): ?>
+    <div class="alert alert-<?php echo (strpos($msg, "Error") !== false ? "danger" : "success"); ?> mt-4">
+        <?php echo $msg; ?>
+    </div>
+	<?php endif; ?>
+    
 </main>
 

@@ -13,7 +13,7 @@ class ApartDAO {
     }
     
     public function consultarPorNumero() {
-        return "SELECT id_apartamento, numero, id_propietario, created_at
+        return "SELECT numero, id_propietario, created_at
                 FROM apartamento
                 WHERE numero = '{$this->numero}'";
     }

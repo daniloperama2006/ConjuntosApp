@@ -33,7 +33,7 @@
     if (isset($_GET['accion']) && $_GET['accion'] == "consultar" && !empty($_GET['id'])) {
         $propietario = new Propietario($_GET['id']);
         if ($propietario->consultarInformacion()) {
-            if($propietario->contarApartamentos() > 1){
+            if($propietario->contarApartamentos() > 0){
                 echo "<div class='alert alert-danger mt-4'>Este propietario no puede ser eliminado porque tiene apartamentos asociados." ."</br>Cantidad de apartamentos asociados: ". $propietario->contarApartamentos() . "</div>";
                 $band = true;
             }
