@@ -38,11 +38,28 @@ class PropietarioDAO {
                 FROM propietario
                 WHERE id = $this->id";
     }
+    
+    public function consultarInformacion() {
+        return "SELECT * FROM propietario WHERE id = " . $this->id;
+    }
+    
+    
+    
+    public function consultarNombre() {
+        return "SELECT nombre, apellido
+                FROM propietario
+                WHERE id = $this->id";
+    }
 
     public function autenticar() {
         return "SELECT id
                 FROM propietario
                 WHERE correo = '$this->correo' AND clave = '" . md5($this->clave) . "'";
     }
+    
+    public function tieneApartamentos() {
+        return "SELECT COUNT(*) FROM apartamento WHERE id_propietario = " . $this->id;
+    }
+    
 }
 ?>

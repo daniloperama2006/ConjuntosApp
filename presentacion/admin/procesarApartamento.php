@@ -5,13 +5,13 @@ $accion = $_POST['accion'] ?? null;
 
 switch ($accion) {
     case 'crear':
-        $a = new Apartamento("", $_POST['numero'], 0, $_POST['propietario']);
+        $a = new Apartamento("", $_POST['numero'], $_POST['id_propietario']);
         $a->insertar();
         $msg = "Apartamento creado correctamente.";
         break;
 
     case 'actualizar':
-        $a = new Apartamento($_POST['id'], $_POST['numero'], 0, $_POST['propietario']);
+        $a = new Apartamento($_POST['id'], $_POST['numero'], $_POST['id_propietario']);
         $a->actualizar();
         $msg = "Apartamento actualizado.";
         break;
@@ -27,5 +27,5 @@ switch ($accion) {
         break;
 }
 
-header("Location: index.php?pid=" . base64_encode("presentacion/admin/leerPropiedad.php") . "&mensaje=" . urlencode($msg));
+header("Location: index.php?pid=" . base64_encode("presentacion/admin/leerApartamento.php") . "&mensaje=" . urlencode($msg));
 exit();

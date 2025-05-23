@@ -23,5 +23,14 @@ class Conexion{
         return $this -> resultado -> num_rows;
     }
     
+    public function ejecutarConsulta($sentencia){
+        $resultado = $this->conexion->query($sentencia);
+        if (!$resultado) {
+            echo "Error en consulta: " . $this->conexion->error;
+            return false;
+        }
+        return $resultado;
+    }
+    
 }
 ?>

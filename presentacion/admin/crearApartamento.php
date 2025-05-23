@@ -16,7 +16,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">ID del Propietario</label>
-                    <input type="number" name="propietario" class="form-control" required>
+                    <input type="number" name="id_propietario" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-success w-100">Crear Apartamento</button>
             </form>

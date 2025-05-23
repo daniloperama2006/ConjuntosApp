@@ -1,49 +1,42 @@
 <?php
-class ApartDAO{
+class ApartDAO {
     private $idApartamento;
     private $numero;
-    private $bloque;
-    private $idPropietario;
+    private $id_propietario;
+    private $created_at;
     
-    public function __construct($idApartamento = 0, $numero = 0, $bloque = 0, $idPropietario = 0) {
-        $this -> idApartamento = $idApartamento;
-        $this -> numero = $numero;
-        $this -> bloque = $bloque;
-        $this -> idPropietario = $idPropietario;
+    public function __construct($idApartamento = "", $numero = "", $id_propietario = "", $created_at = "") {
+        $this->idApartamento = $idApartamento;
+        $this->numero = $numero;
+        $this->id_propietario = $id_propietario;
+        $this->created_at = $created_at;
     }
-    
-    public function consultarPorPropietario($idPropietario){
-        return "select a.id_apartamento , a.numero, a.id_propietario, u.nombre, u.apellido
-                from apartamento a join propietario u on (a.id_propietario = u.id_usuario)
-                where a.id_propietario = 3";
-    }
-    
     
     public function consultarPorNumero() {
-        return "SELECT id_apartamento, numero, id_propietario
-            FROM apartamento
-            WHERE numero = " . $this->numero;
+        return "SELECT id_apartamento, numero, id_propietario, created_at
+                FROM apartamento
+                WHERE numero = '{$this->numero}'";
     }
     
     public function insertar() {
         return "INSERT INTO apartamento (numero, id_propietario)
-            VALUES ($this->numero, $this->idPropietario)";
+                VALUES ('{$this->numero}', {$this->id_propietario})";
     }
     
     public function actualizar() {
         return "UPDATE apartamento
-            SET numero = $this->numero, id_propietario = $this->idPropietario
-            WHERE id_apartamento = $this->idApartamento";
+                SET numero = '{$this->numero}', id_propietario = {$this->id_propietario}
+                WHERE id_apartamento = {$this->idApartamento}";
     }
     
     public function eliminar() {
-        return "DELETE FROM apartamento WHERE id_apartamento = $this->idApartamento";
+        return "DELETE FROM apartamento WHERE id_apartamento = {$this->idApartamento}";
     }
     
     public function consultarTodos() {
-        return "SELECT id_apartamento, numero, id_propietario FROM apartamento";
+        return "SELECT a.id_apartamento,p.id, a.numero, p.nombre, p.apellido, a.created_at
+                FROM apartamento a
+                JOIN propietario p ON a.id_propietario = p.id";
     }
-    
 }
-
 ?>

@@ -48,10 +48,10 @@
                         Propiedad
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="propiedadDropdown">
-                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/crearPropiedad.php'); ?>">Crear</a></li>
-                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/leerPropiedad.php'); ?>">Consultar</a></li>
-                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/actualizarPropiedad.php'); ?>">Actualizar</a></li>
-                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/eliminarPropiedad.php'); ?>">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/crearApartamento.php'); ?>">Crear</a></li>
+                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/leerApartamento.php'); ?>">Consultar</a></li>
+                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/actualizarApartamento.php'); ?>">Actualizar</a></li>
+                        <li><a class="dropdown-item" href="?pid=<?php echo base64_encode('presentacion/admin/eliminarApartamento.php'); ?>">Eliminar</a></li>
                     </ul>
                 </li>
 

@@ -22,8 +22,12 @@ switch ($accion) {
         
     case 'eliminar':
         $p = new Propietario($_POST['id']);
-        $p->eliminar();
-        $msg = "Propietario eliminado.";
+        if ($p->contarApartamentos() > 0) {
+            $msg = "No se puede eliminar el propietario. Tiene apartamentos asociados.";
+        } else {
+            $p->eliminar();
+            $msg = "Propietario eliminado.";
+        }
         break;
         
     default:

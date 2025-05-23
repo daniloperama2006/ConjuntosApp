@@ -29,6 +29,36 @@ class Propietario extends Persona {
         $conexion->cerrar();
     }
     
+    public function consultarInformacion() {
+        $dao = new PropietarioDAO($this->id);
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $resultado = $conexion->ejecutar($dao->consultarInformacion());
+        $registro = $conexion->registro($resultado);
+        $conexion->cerrar();
+        
+        if ($registro) {
+            $this->nombre = $registro[1];
+            $this->apellido = $registro[2];
+            $this->correo = $registro[3];
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    public function consultarNombre() {
+        $conexion = new Conexion();
+        $dao = new PropietarioDAO($this->id);
+        $conexion->abrir();
+        $conexion->ejecutar($dao->consultar());
+        $datos = $conexion->registro();
+        $this->nombre = $datos[0];
+        $this->apellido = $datos[1];
+        $conexion->cerrar();
+    }
+    
     public function consultarTodos() {
         $conexion = new Conexion();
         $dao = new PropietarioDAO();
@@ -71,6 +101,18 @@ class Propietario extends Persona {
             $conexion->cerrar();
             return false;
         }
+    } 
+    
+    public function contarApartamentos() {
+        $conexion = new Conexion();
+        $dao = new PropietarioDAO($this->id);
+        $conexion->abrir();
+        $resultado = $conexion->ejecutar($dao->tieneApartamentos());  // usamos ejecutar
+        $fila = $conexion->registro();  // aquí usamos registro() para obtener la fila
+        $conexion->cerrar();
+        return (int)$fila[0];
     }
+    
+    
 }
 ?>
