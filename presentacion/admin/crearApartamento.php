@@ -1,3 +1,18 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once("logica/Apartamento.php");
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['numero']) && !empty($_POST['id_propietario'])) {
+        $a = new Apartamento( $_POST['numero'], $_POST['id_propietario']);
+        $a->insertar();
+        $msg = "Apartamento creado con éxito.";
+    }
+}
+?>
 <body class="bg-light">
 	<?php include("presentacion/encabezadoAdmin.php")?>
 </body>
@@ -8,7 +23,7 @@
             <h5 class="mb-0">Registrar Nuevo Apartamento</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="index.php?pid=<?php echo base64_encode("presentacion/admin/procesarApartamento.php"); ?>">
+            <form method="post" action="index.php?pid=<?php echo base64_encode("presentacion/admin/crearApartamento.php"); ?>">
                 <input type="hidden" name="accion" value="crear">
                 <div class="mb-3">
                     <label class="form-label">Número de Apartamento</label>
@@ -22,4 +37,10 @@
             </form>
         </div>
     </div>
+    
+    <?php if (isset($msg)): ?>
+    <div class="alert alert-<?php echo (strpos($msg, "Error") !== false ? "danger" : "success"); ?> mt-4">
+        <?php echo $msg; ?>
+    </div>
+	<?php endif; ?>
 </main>

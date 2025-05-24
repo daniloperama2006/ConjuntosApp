@@ -73,6 +73,18 @@ class CobroDAO {
     ";
     }
     
+    public function tieneCuentas($numero) {
+        return "
+        SELECT
+            cc.id_cuenta
+        FROM
+            cuenta_cobro cc
+            JOIN apartamento a ON cc.numero_apartamento = a.numero
+        WHERE
+        	a.numero = {$numero}
+    ";
+    }
+    
     
 }
 ?>

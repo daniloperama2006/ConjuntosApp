@@ -110,6 +110,20 @@ class CuentaCobro {
     $conexion->cerrar();
     return $cuentas;
     }
+    
+    public function tieneCuentas($numero) {
+        $conexion = new Conexion();
+        $cuentaDAO = new CobroDAO();
+        $conexion->abrir();
+        $conexion->ejecutar($cuentaDAO->tieneCuentas($numero));
+        if($conexion->filas() > 0){
+            $conexion->cerrar();
+            return true;
+        }else{
+            $conexion->cerrar();
+            false;
+        }
+    }
 
 
 
