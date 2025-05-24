@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     
     $apartamento = new Apartamento($numero,"","");
-    $apartamento->consultarPorNumero();
-    if ($apartamento->getNumero() !== null && $apartamento->getNumero() !== "") {
+    $apartamentos = $apartamento->consultarPorNumero();
+    if (!empty($apartamentos)) {
         $estado = new Estado(1);
         $cuenta = new CuentaCobro(0, $numero, $estado, $fecha, $valor, $idAdmin);
         $cobroDAO = new CobroDAO(

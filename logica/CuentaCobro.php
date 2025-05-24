@@ -53,28 +53,26 @@ class CuentaCobro {
         $conexion = new Conexion();
         $cuentaDAO = new CobroDAO();
         $conexion->abrir();
-
+        
         $conexion->ejecutar($cuentaDAO->consultarCuentasPorEstado($estadoId));
-
+        
         $cuentas = array();
         while (($datos = $conexion->registro()) != null) {
-            $apartamento = new Apartamento($datos[1], $datos[2], $datos[3]); 
-            $estado = new Estado(0, $datos[7]);
+            $estado = new Estado($datos[4], $datos[5]); 
             $cuenta = new CuentaCobro(
-                $datos[0],         
-                $apartamento,      
-                $estado,          
-                $datos[5],        
-                $datos[6],         
-                $datos[4]          
-            );
-
-            array_push($cuentas, $cuenta);
+                $datos[0],
+                $datos[1],
+                $estado,
+                $datos[2],
+                $datos[3]
+                );
+            $cuentas[] = $cuenta;
         }
-
+        
         $conexion->cerrar();
         return $cuentas;
     }
+    
 
 
     public function consultarPorPropietario($idPropietario) {

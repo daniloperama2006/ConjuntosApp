@@ -50,5 +50,6 @@ class ApartDAO {
             FROM apartamento a
             WHERE a.id_propietario = {$this->id_propietario}";
     }
+    
 }
 ?>

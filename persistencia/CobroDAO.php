@@ -18,8 +18,8 @@ class CobroDAO {
     
     public function insertarCuentaCobro() {
         return "
-        INSERT INTO cuenta_cobro (numero_apartamento, id_estado, fecha_generacion, valor, saldo_pendiente, id_admin)
-        VALUES ({$this->numero}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->valor}, {$this->idAdministrador})
+        INSERT INTO cuenta_cobro (numero_apartamento, id_estado, fecha_generacion, valor, id_admin)
+        VALUES ({$this->numero}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->idAdministrador})
     ";
     }
     
@@ -33,21 +33,12 @@ class CobroDAO {
     
     public function consultarCuentasPorEstado($idEstado) {
         return "
-            SELECT
-                cc.id_cuenta, a.numero, u.id, u.nombre AS nombre_propietario,
-                u.apellido AS apellido_propietario, cc.fecha_generacion, cc.valor,
-                e.nombre_estado AS estado_cuenta
-            FROM
-                cuenta_cobro cc
-                JOIN apartamento a ON cc.numero_apartamento = a.numero
-                JOIN propietario u ON a.id_propietario = u.id
-                JOIN estado e ON cc.id_estado = e.id_estado
-            WHERE
-                e.id_estado = {$idEstado}
-            ORDER BY
-                u.apellido, u.nombre, a.numero
-        ";
+        SELECT c.id_cuenta, c.numero_apartamento, c.fecha_generacion, c.valor, e.id_estado, e.nombre_estado
+        FROM cuenta_cobro AS c
+        JOIN estado AS e ON c.id_estado = e.id_estado
+        WHERE c.id_estado = {$idEstado}";
     }
+    
     
     public function consultarCuentasPorPropietario($idPropietario) {
         return "

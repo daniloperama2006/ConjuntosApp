@@ -84,7 +84,7 @@
                                 foreach ($cuentas as $cuenta) {
                                     echo "<tr>";
                                     echo "<td>" . $cuenta->getId() . "</td>";
-                                    echo "<td>" . $cuenta->getNumeroApartamento()->getNumero() . "</td>";
+                                    echo "<td>" . $cuenta->getNumeroApartamento() . "</td>";
                                     echo "<td>" . $cuenta->getFechaGeneracion() . "</td>";
                                     echo "<td>$" . number_format($cuenta->getValor(), 2) . "</td>";
                                     echo "<td>" . $cuenta->getEstado()->getNombreEstado() . "</td>";
