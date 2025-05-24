@@ -61,5 +61,10 @@ class PropietarioDAO {
         return "SELECT COUNT(*) FROM apartamento WHERE id_propietario = " . $this->id;
     }
     
+    public function consultarPorCorreo($correo) {
+        return "SELECT nombre, apellido, correo FROM propietario WHERE correo = '$correo'";
+    }
+    
+    
 }
 ?>

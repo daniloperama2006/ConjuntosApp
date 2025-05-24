@@ -114,11 +114,23 @@ class Propietario extends Persona {
         $conexion = new Conexion();
         $dao = new PropietarioDAO($this->id);
         $conexion->abrir();
-        $resultado = $conexion->ejecutar($dao->tieneApartamentos());  // usamos ejecutar
-        $fila = $conexion->registro();  // aquí usamos registro() para obtener la fila
+        $resultado = $conexion->ejecutar($dao->tieneApartamentos()); 
+        $fila = $conexion->registro();  
         $conexion->cerrar();
         return (int)$fila[0];
     }
+    
+    public function existeCorreo($correo) {
+        $conexion = new Conexion();
+        $dao = new PropietarioDAO();
+        $conexion->abrir();
+        $sql = $dao->consultarPorCorreo($correo);
+        $conexion->ejecutar($sql);
+        $datos = $conexion->registro();
+        $conexion->cerrar();
+        return ($datos != null);
+    }
+    
     
     
 }
