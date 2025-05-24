@@ -26,6 +26,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="?pid=<?php echo base64_encode("presentacion/propietario/consultarCuenta.php")?>" class="btn btn-outline-light btn-sm me-2">
+                        Consultar Cuentas de Cobro
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="?pid=<?php echo base64_encode("presentacion/cerrarSesion.php")?>" class="btn btn-danger btn-sm">
                         Cerrar sesión
                     </a>

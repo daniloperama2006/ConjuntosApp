@@ -121,11 +121,37 @@ class CuentaCobro {
             return true;
         }else{
             $conexion->cerrar();
-            false;
+            return false;
         }
     }
 
-
+    public function consultarPorApartamento($numeroApartamento) {
+        $conexion = new Conexion();
+        $cuentaDAO = new CobroDAO();
+        $conexion->abrir();
+        
+        $conexion->ejecutar($cuentaDAO->consultarCuentasPorApartamento($numeroApartamento));
+        
+        $cuentas = array();
+        while (($datos = $conexion->registro()) != null) {
+            $apartamento = new Apartamento($datos[1], null, null); // sólo número, el resto puede ir null si no lo usas
+            $estado = new Estado(0, $datos[7]);
+            $cuenta = new CuentaCobro(
+                $datos[0],           // id
+                $apartamento,        // númeroApartamento como objeto Apartamento
+                $estado,             // estado
+                $datos[5],           // fechaGeneracion
+                $datos[6],           // valor
+                $datos[2]            // idAdministrador (aquí es idPropietario, revisa según tu modelo)
+                );
+            
+            array_push($cuentas, $cuenta);
+        }
+        
+        $conexion->cerrar();
+        return $cuentas;
+    }
+    
 
 }
 

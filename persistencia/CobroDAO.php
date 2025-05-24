@@ -85,6 +85,28 @@ class CobroDAO {
     ";
     }
     
+    public function consultarCuentasPorApartamento($numeroApartamento) {
+        return "
+        SELECT
+            cc.id_cuenta,
+            cc.numero_apartamento,
+            p.id AS id_propietario,
+            p.nombre AS nombre_propietario,
+            p.apellido AS apellido_propietario,
+            cc.fecha_generacion,
+            cc.valor,
+            e.nombre_estado AS estado_cuenta
+        FROM
+            cuenta_cobro cc
+            JOIN apartamento a ON cc.numero_apartamento = a.numero
+            JOIN propietario p ON a.id_propietario = p.id
+            JOIN estado e ON cc.id_estado = e.id_estado
+        WHERE
+            cc.numero_apartamento = {$numeroApartamento}
+        ORDER BY
+            p.apellido, p.nombre, cc.numero_apartamento
+    ";
+    }
     
 }
 ?>
