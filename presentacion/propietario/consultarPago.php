@@ -26,47 +26,68 @@
 
         <?php
         include_once("logica/Pago.php");
-
+        
         if (isset($_GET['accion'])) {
             $accion = $_GET['accion'];
             $idPropietario = $_SESSION['id'];
             $pago = new Pago();
             $pagos = [];
-
+        
             if ($accion == "buscar" && !empty($_GET['numeroApartamento'])) {
                 $numero = (int)$_GET['numeroApartamento'];
                 $pagos = $pago->consultarPorPropiedad($idPropietario, $numero);
             } elseif ($accion == "todos") {
-                $pagos = $pago->consultarPagosPorPropietario($idPropietario);
+                $pagos = $pago->consultarPagosPorPropietario($idPropietario); // Esto devuelve array asociativo
             }
-
+        
             if (!empty($pagos)) {
                 echo "<div class='card shadow-sm'>";
                 echo "<div class='card-header bg-light'><h5 class='mb-0'>Historial de Pagos</h5></div>";
                 echo "<div class='card-body'>";
                 echo "<table class='table table-bordered table-striped'>";
+                
+                // Encabezado de tabla
                 echo "<thead><tr>
                         <th>ID Pago</th>
                         <th>ID Cuenta</th>
                         <th>Fecha de Pago</th>
-                        <th>Monto Pagado</th>
-                      </tr></thead><tbody>";
-
+                        <th>Monto Pagado</th>";
+                
+                if ($accion == "todos") {
+                    echo "<th>Número de Apartamento</th>";
+                }
+        
+                echo "</tr></thead><tbody>";
+        
+                // Cuerpo de la tabla
                 foreach ($pagos as $p) {
                     echo "<tr>";
-                    echo "<td>" . $p->getIdPago() . "</td>";
-                    echo "<td>" . $p->getIdCuenta() . "</td>";
-                    echo "<td>" . $p->getFechaPago() . "</td>";
-                    echo "<td>$" . number_format($p->getMontoPagado(), 2) . "</td>";
+        
+                    if ($accion == "todos") {
+                        // $p es un array asociativo
+                        echo "<td>" . $p['id_pago'] . "</td>";
+                        echo "<td>" . $p['id_cuenta'] . "</td>";
+                        echo "<td>" . $p['fecha_pago'] . "</td>";
+                        echo "<td>$" . number_format($p['monto_pagado'], 2) . "</td>";
+                        echo "<td>" . $p['numero_apartamento'] . "</td>";
+                    } else {
+                        // $p es un objeto Pago
+                        echo "<td>" . $p->getIdPago() . "</td>";
+                        echo "<td>" . $p->getIdCuenta() . "</td>";
+                        echo "<td>" . $p->getFechaPago() . "</td>";
+                        echo "<td>$" . number_format($p->getMontoPagado(), 2) . "</td>";
+                    }
+        
                     echo "</tr>";
                 }
-
+        
                 echo "</tbody></table></div></div>";
             } else {
                 echo "<div class='alert alert-warning'>No se encontraron pagos registrados.</div>";
             }
         }
         ?>
+
 
     </main>
 </body>

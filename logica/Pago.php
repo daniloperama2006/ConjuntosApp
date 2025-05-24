@@ -54,21 +54,28 @@ class Pago {
     }
     
     
-    public function consultarPagosPorPropietario($numeroApartamento) {
+    public function consultarPagosPorPropietario($idPropietario) {
         $dao = new PagoDAO();
         $conexion = new Conexion();
         $conexion->abrir();
-        $resultado = $conexion->ejecutar($dao->consultarPagosPorPropietario($numeroApartamento));
+        $resultado = $conexion->ejecutar($dao->consultarPagosPorPropietario($idPropietario));
         
         $pagos = [];
         
         while (($registro = $conexion->registro($resultado)) != null) {
-            $pagos[] = new Pago($registro[0], $registro[1], $registro[2], $registro[3]);
+            $pagos[] = [
+                'id_pago' => $registro[0],
+                'id_cuenta' => $registro[1],
+                'fecha_pago' => $registro[2],
+                'monto_pagado' => $registro[3],
+                'numero_apartamento' => $registro[4]
+            ];
         }
         
         $conexion->cerrar();
         return $pagos;
     }
+    
     
 }
 

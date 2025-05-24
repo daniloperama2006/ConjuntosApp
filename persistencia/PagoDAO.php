@@ -31,7 +31,7 @@ class PagoDAO {
         }
         
         public function consultarPagosPorPropietario($idPropietario) {
-            return "SELECT p.id_pago, p.id_cuenta, p.fecha_pago, p.monto_pagado
+            return "SELECT p.id_pago, p.id_cuenta, p.fecha_pago, p.monto_pagado, a.numero
                 FROM pago p
                 JOIN cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
                 JOIN apartamento a ON cc.numero_apartamento = a.numero
