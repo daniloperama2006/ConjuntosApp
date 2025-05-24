@@ -16,7 +16,7 @@ class PropietarioDAO {
     
     public function insertar() {
         return "INSERT INTO propietario (nombre, apellido, correo, clave)
-            VALUES ('$this->nombre', '$this->apellido', '$this->correo', '" . md5($this->clave) . "')";
+            VALUES ('$this->nombre', '$this->apellido', '$this->correo', '" . $this->clave . "')";
     }
     
     public function actualizar() {

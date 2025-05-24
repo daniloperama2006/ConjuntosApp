@@ -9,11 +9,11 @@ $msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['correo']) && !empty($_POST['clave'])) {
-        $propietario = new Propietario("", $_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['clave']);
-        if ($propietario->existeCorreo($_POST['correo'])) {
+        $p = new Propietario("", $_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['clave']);
+        if ($p->existeCorreo($_POST['correo'])) {
             $msg = "Error: Ya existe un correo asociado a otro propietario";
         } else {
-            $propietario->insertar();
+            $p->insertar();
             header("Location: ?pid=" . base64_encode("presentacion/autenticar.php"));
             exit;
         }
