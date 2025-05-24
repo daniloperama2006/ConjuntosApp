@@ -51,9 +51,7 @@ if (isset($_GET['idCuenta'])) {
 ?>
 
 <section class="container my-5">
-	<div class="mt-4">
-                    <a href='presentacion/sesionPropietario.php' class="btn btn-secondary">Volver, NO sirve el boton jajsk</a>
-    </div>
+<a href="index.php?pid=<?php echo base64_encode('presentacion/propietario/sesionPropietario.php'); ?>" class="btn btn-secondary mt-3 mb-4">Volver a mis cuentas</a>
     </br>
     <div class="card shadow-sm">
         <div class="card-header bg-light">

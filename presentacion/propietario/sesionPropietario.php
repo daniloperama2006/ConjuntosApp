@@ -14,7 +14,7 @@
         <table class="table table-hover" id="tablaCuentasProp">
           <thead>
             <tr>
-              <th>Id_Cuenta</th>
+              <th>Numero Cuenta de Cobro</th>
               <th>Apartamento</th>
               <th>Fecha</th>
               <th>Valor</th>
@@ -30,7 +30,7 @@
 
               foreach ($cuentas as $cuenta) {
                   $idCuenta = $cuenta->getId();
-                  $numeroApto = $cuenta->getApartamento()->getNumero();
+                  $numeroApto = $cuenta->getNumeroApartamento()->getNumero();
                   $fecha = $cuenta->getFechaGeneracion();
                   $valor = $cuenta->getValor();
                   $estado = $cuenta->getEstado()->getNombreEstado();
@@ -44,7 +44,7 @@
                   echo "<td>$estado</td>";
 
                   if ($estado == "PENDIENTE" || $estado == "EN MORA") {
-                      $accion = "<a href='?pid=" . base64_encode("presentacion/pagar.php") . "&idCuenta={$cuenta->getId()}'>Pagar</a>";
+                      $accion = "<a href='?pid=" . base64_encode("presentacion/propietario/pagar.php") . "&idCuenta={$cuenta->getId()}'>Pagar</a>";
                   } else {
                       $accion = "Pagada";
                   }
