@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../persistencia/PagoDAO.php";
+require_once __DIR__ . "/../persistencia/Conexion.php";
 
 class Estado{
     private $idEstado;

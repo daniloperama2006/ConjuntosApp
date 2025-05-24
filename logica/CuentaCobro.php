@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../persistencia/CobroDAO.php";
-require_once __DIR__ . "/../persistencia/conexion.php";
+require_once __DIR__ . "/../persistencia/Conexion.php";
 class CuentaCobro {
     private $id;
     private $numeroApartamento;
@@ -47,13 +47,6 @@ class CuentaCobro {
 
     public function getIdAdministrador() {
         return $this->idAdministrador;
-    }
-
-    public function pagar() {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $conexion->ejecutar("update cuenta_cobro SET id_estado = 2 WHERE id_cuenta = " . $this->id);
-        $conexion->cerrar();
     }
 
     public function consultarPorEstado($estadoId) {

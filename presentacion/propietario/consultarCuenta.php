@@ -1,5 +1,5 @@
 <body>
-    <?php include("presentacion/encabezadoPropietario.php")?>
+    <?php include("presentacion/encabezadoPropietario.php") ?>
 
     <main class="container my-5">
 
@@ -31,18 +31,14 @@
             $accion = $_GET['accion'];
             $idPropietario = $_SESSION['id'];
             $cuentaCobro = new CuentaCobro();
+            $resultados = [];
+            $saldoGlobal = 0;
 
             if ($accion == "buscar" && !empty($_GET['numeroApartamento'])) {
                 $numero = (int)$_GET['numeroApartamento'];
                 $resultados = $cuentaCobro->consultarPorApartamento($numero);
-                // Opcional: filtrar para que solo muestre si es de este propietario (seguridad)
-                $resultados = array_filter($resultados, function($c) use ($idPropietario) {
-                    return $c->getIdAdministrador() == $idPropietario;
-                });
             } elseif ($accion == "todos") {
                 $resultados = $cuentaCobro->consultarPorPropietario($idPropietario);
-            } else {
-                $resultados = [];
             }
 
             if (!empty($resultados)) {

@@ -18,11 +18,10 @@ class CobroDAO {
     
     public function insertarCuentaCobro() {
         return "
-            INSERT INTO cuenta_cobro (numero_apartamento, id_estado, fecha_generacion, valor, id_admin)
-            VALUES ({$this->numero}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->idAdministrador})
-        ";
+        INSERT INTO cuenta_cobro (numero_apartamento, id_estado, fecha_generacion, valor, saldo_pendiente, id_admin)
+        VALUES ({$this->numero}, {$this->idEstado}, '{$this->fechaGeneracion}', {$this->valor}, {$this->valor}, {$this->idAdministrador})
+    ";
     }
-    
     
     public function cambiarEstadoCuenta($idCuenta, $nuevoEstado) {
         return "
@@ -107,6 +106,8 @@ class CobroDAO {
             p.apellido, p.nombre, cc.numero_apartamento
     ";
     }
+    
+    
     
 }
 ?>

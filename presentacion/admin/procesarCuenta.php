@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($apartamento->getNumero() !== null && $apartamento->getNumero() !== "") {
         $estado = new Estado(1);
         $cuenta = new CuentaCobro(0, $numero, $estado, $fecha, $valor, $idAdmin);
-        
         $cobroDAO = new CobroDAO(
             $cuenta->getId(),
             $cuenta->getNumeroApartamento(),

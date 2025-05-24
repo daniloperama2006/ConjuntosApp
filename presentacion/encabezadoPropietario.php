@@ -1,3 +1,6 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
@@ -28,6 +31,11 @@
                 <li class="nav-item">
                     <a href="?pid=<?php echo base64_encode("presentacion/propietario/consultarCuenta.php")?>" class="btn btn-outline-light btn-sm me-2">
                         Consultar Cuentas de Cobro
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?pid=<?php echo base64_encode("presentacion/propietario/consultarPago.php")?>" class="btn btn-outline-light btn-sm me-2">
+                        Consultar Pagos
                     </a>
                 </li>
                 <li class="nav-item">
