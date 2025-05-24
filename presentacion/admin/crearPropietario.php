@@ -7,6 +7,8 @@ require_once("logica/Propietario.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['correo']) && !empty($_POST['clave'])) {
+        $p = new Propietario("", $_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['clave']);
+        $p->insertar();
         $msg = "Propietario creado con éxito.";
     }
 }

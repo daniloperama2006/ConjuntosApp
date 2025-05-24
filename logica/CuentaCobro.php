@@ -3,7 +3,7 @@ require_once __DIR__ . "/../persistencia/CobroDAO.php";
 require_once __DIR__ . "/../persistencia/conexion.php";
 class CuentaCobro {
     private $id;
-    private $apartamento;
+    private $numeroApartamento;
     private $estado;
     private $fechaGeneracion;
     private $valor;
@@ -11,14 +11,14 @@ class CuentaCobro {
 
     public function __construct(
         $id = 0,
-        $apartamento = "",
+        $numeroApartamento = "",
         $estado = "",
         $fechaGeneracion = "",
         $valor = 0.00,
         $idAdministrador = 0
     ) {
         $this->id = $id;
-        $this->apartamento = $apartamento;
+        $this->numeroApartamento = $numeroApartamento;
         $this->estado = $estado;
         $this->fechaGeneracion = $fechaGeneracion;
         $this->valor = $valor;
@@ -29,8 +29,8 @@ class CuentaCobro {
         return $this->id;
     }
 
-    public function getApartamento() {
-        return $this->apartamento;
+    public function getNumeroApartamento() {
+        return $this->numeroApartamento;
     }
 
     public function getEstado() {

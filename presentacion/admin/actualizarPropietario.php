@@ -11,6 +11,7 @@ $propietario = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'actualizar') {
     if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['correo'])) {
         $propietario = new Propietario($_POST['id'], $_POST['nombre'], $_POST['apellido'], $_POST['correo']);
+        $propietario->actualizar();
         $msg = "Propietario actualizado con éxito.";
     }
 } elseif (isset($_GET['accion']) && $_GET['accion'] === 'consultar' && !empty($_GET['id'])) {

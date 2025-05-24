@@ -3,20 +3,14 @@ require_once("persistencia/Conexion.php");
 require_once("persistencia/ApartDAO.php");
 
 class Apartamento {
-    private $idApartamento;
     private $numero;
-    private $id_propietario;
+    private $idPropietario;
     private $created_at;
     
-    public function __construct($idApartamento = "", $numero = "", $id_propietario = "", $created_at = "") {
-        $this->idApartamento = $idApartamento;
+    public function __construct($numero = "", $idPropietario = "", $created_at = "") {
         $this->numero = $numero;
-        $this->id_propietario = $id_propietario;
+        $this->idPropietario = $idPropietario;
         $this->created_at = $created_at;
-    }
-    
-    public function getIdApartamento() {
-        return $this->idApartamento;
     }
     
     public function getNumero() {
@@ -31,9 +25,8 @@ class Apartamento {
         return $this->created_at;
     }
     
-
     public function consultarPorNumero() {
-        $dao = new ApartDAO(0, $this->numero);
+        $dao = new ApartDAO($this->numero);
         $conexion = new Conexion();
         $conexion->abrir();
         $resultado = $conexion->ejecutar($dao->consultarPorNumero());
@@ -42,10 +35,9 @@ class Apartamento {
         
         while ($registro = $conexion->registro($resultado)) {
             $apartamentos[] = [
-                "idApartamento" => $registro[0],
-                "numero" => $registro[1],
-                "id_propietario" => $registro[2],
-                "created_at" => $registro[3]
+                "numero" => $registro[0],
+                "id_propietario" => $registro[1],
+                "created_at" => $registro[2]
             ];
         }
         
@@ -54,31 +46,31 @@ class Apartamento {
     }
     
     public function insertar() {
-        $dao = new ApartDAO(0, $this->numero, $this->id_propietario);
+        $dao = new ApartDAO($this->numero, $this->idPropietario);
         $conexion = new Conexion();
         $conexion->abrir();
         $conexion->ejecutar($dao->insertar());
         $conexion->cerrar();
     }
     
-    public function actualizar() {
+    public function actualizar($nuevoNumero, $nuevoPropietario) {
         $conexion = new Conexion();
         $conexion->abrir();
         
         // Validar propietario antes de actualizar
-        $validarPropietario = $conexion->ejecutar("SELECT id FROM propietario WHERE id = {$this->id_propietario}");
+        $validarPropietario = $conexion->ejecutar("SELECT id FROM propietario WHERE id = {$nuevoPropietario}");
         if (!$conexion->registro($validarPropietario)) {
             $conexion->cerrar();
-            throw new Exception("Error: El propietario con ID {$this->id_propietario} no existe.");
+            throw new Exception("Error: El propietario con ID {$nuevoPropietario} no existe.");
         }
         
-        $dao = new ApartDAO($this->idApartamento, $this->numero, $this->id_propietario);
-        $conexion->ejecutar($dao->actualizar());
+        $dao = new ApartDAO($this->numero, $this->idPropietario);
+        $conexion->ejecutar($dao->actualizar($nuevoNumero, $nuevoPropietario));
         $conexion->cerrar();
     }
     
     public function eliminar() {
-        $dao = new ApartDAO($this->idApartamento);
+        $dao = new ApartDAO($this->numero, $this->idPropietario);
         $conexion = new Conexion();
         $conexion->abrir();
         $conexion->ejecutar($dao->eliminar());

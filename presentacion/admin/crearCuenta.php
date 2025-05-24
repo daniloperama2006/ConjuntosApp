@@ -25,11 +25,10 @@
                     <?php } ?>
     
                     <div class="mb-3">
-                            <label for="selectApartamento" class="form-label">Apartamento</label>
                             <div class="mb-3">
                                 <label for="inputNumero" class="form-label">Número de Apartamento</label>
                                 <input id="inputNumero" name="numero" type="text" class="form-control" required>
-                            </div>                        
+                            </div>                   
 
                         </div>
                         <div class="mb-3">
@@ -85,7 +84,7 @@
                                 foreach ($cuentas as $cuenta) {
                                     echo "<tr>";
                                     echo "<td>" . $cuenta->getId() . "</td>";
-                                    echo "<td>" . $cuenta->getApartamento()->getNumero() . "</td>";
+                                    echo "<td>" . $cuenta->getNumeroApartamento()->getNumero() . "</td>";
                                     echo "<td>" . $cuenta->getFechaGeneracion() . "</td>";
                                     echo "<td>$" . number_format($cuenta->getValor(), 2) . "</td>";
                                     echo "<td>" . $cuenta->getEstado()->getNombreEstado() . "</td>";

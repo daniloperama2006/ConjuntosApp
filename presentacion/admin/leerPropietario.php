@@ -38,28 +38,37 @@
     <?php
     require_once 'logica/Propietario.php';
 
-    if (isset($_GET['accion'])) {
-        if ($_GET['accion'] == "consultar" && !empty($_GET['id'])) {
-            $propietario = new Propietario($_GET['id']);
-            $propietario->consultar();
-
+    if (isset($_GET['accion']) && $_GET['accion'] == "consultar" && !empty($_GET['id'])) {
+        $propietario = new Propietario($_GET['id']);
+        $propietario->consultar();
+        
+        if ($propietario->getNombre()) {
             echo "<div class='mt-4 alert alert-light'>";
             echo "<strong>ID:</strong> " . $propietario->getId() . "<br>";
             echo "<strong>Nombre:</strong> " . $propietario->getNombre() . "<br>";
             echo "<strong>Apellido:</strong> " . $propietario->getApellido() . "<br>";
             echo "<strong>Correo:</strong> " . $propietario->getCorreo() . "<br>";
             echo "</div>";
-        } elseif ($_GET['accion'] == "todos") {
-            $temp = new Propietario();
-            $todos = $temp->consultarTodos();
-
+        } else {
+            echo "<div class='mt-4 alert alert-warning'>Propietario no encontrado.</div>";
+        }
+    }
+    elseif (isset($_GET['accion']) && $_GET['accion'] == "todos") {
+        $temp = new Propietario();
+        $todos = $temp->consultarTodos();
+        
+        if (!empty($todos)) {
             echo "<table class='table table-bordered table-striped mt-4'>";
             echo "<thead><tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Correo</th></tr></thead><tbody>";
             foreach ($todos as $p) {
                 echo "<tr><td>{$p[0]}</td><td>{$p[1]}</td><td>{$p[2]}</td><td>{$p[3]}</td></tr>";
             }
             echo "</tbody></table>";
+        } else {
+            echo "<div class='mt-4 alert alert-info'>No hay propietarios registrados.</div>";
         }
     }
+    
+    
     ?>
 </main>

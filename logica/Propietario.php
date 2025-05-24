@@ -23,9 +23,16 @@ class Propietario extends Persona {
         $conexion->abrir();
         $conexion->ejecutar($dao->consultar());
         $datos = $conexion->registro();
-        $this->nombre = $datos[0];
-        $this->apellido = $datos[1];
-        $this->correo = $datos[2];
+        if ($datos != null) {
+            $this->nombre = $datos[0];
+            $this->apellido = $datos[1];
+            $this->correo = $datos[2];
+        }
+        else{
+            $this->nombre = null;
+            $this->apellido = null;
+            $this->correo = null;
+        }
         $conexion->cerrar();
     }
     

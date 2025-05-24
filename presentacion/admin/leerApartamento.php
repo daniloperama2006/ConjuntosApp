@@ -37,11 +37,11 @@
     </div>
 
     <?php
-    require_once 'logica/Apartamento.php'; // Asegúrate de que esta clase exista y use ApartDAO correctamente
+    require_once 'logica/Apartamento.php';
 
     if (isset($_GET['accion'])) {
         if ($_GET['accion'] == "consultar" && !empty($_GET['numero'])) {
-            $apartamentoConsulta = new Apartamento(0, $_GET['numero']);
+            $apartamentoConsulta = new Apartamento($_GET['numero']);
             $apartamentos = $apartamentoConsulta->consultarPorNumero();
             
             if (count($apartamentos) > 0) {
@@ -51,7 +51,6 @@
                     $propietario->consultarNombre();
                     
                     echo "<div class='alert alert-light mb-3'>";
-                    echo "<strong>ID Registro:</strong> " . $apt['idApartamento'] . "<br>";
                     echo "<strong>Número Apartamento:</strong> " . $apt['numero'] . "<br>";
                     echo "<strong>Creado en:</strong> " . $apt['created_at'] . "<br>";
                     echo "<strong>ID Propietario:</strong> " . $apt['id_propietario'] . "<br>";
@@ -68,7 +67,7 @@
             $todos = $temp->consultarTodos();
 
             echo "<table class='table table-bordered table-striped mt-4'>";
-            echo "<thead><tr><th>ID registro</th><th>Id Propietario</th><th>Número Apartamento</th><th>Nombre Propietario</th><th>Apellido Propietario</th><th>Fue Creado</th></tr></thead><tbody>";
+            echo "<thead><tr><th>ID Apartamento</th><th>Id Propietario</th><th>Nombre Propietario</th><th>Apellido Propietario</th><th>Fue Creado</th></tr></thead><tbody>";
             foreach ($todos as $a) {
                 echo "<tr>
                 <td>{$a[0]}</td>
@@ -76,7 +75,6 @@
                 <td>{$a[2]}</td>
                 <td>{$a[3]}</td>
                 <td>{$a[4]}</td>
-                <td>{$a[5]}</td>
             </tr>";
             }
             echo "</tbody></table>";

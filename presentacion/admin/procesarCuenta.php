@@ -12,20 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $valor = $_POST["valor"] ?? "";
     $idAdmin = $_SESSION["id"];
     
-    if (empty($numero) || empty($fecha) || empty($valor) || !$idAdmin) {
+    if (empty($numero) ||empty($fecha) || empty($valor) || !$idAdmin) {
         header("Location: index.php?pid=" . base64_encode("presentacion/admin/crearCuenta.php") . "&error=Datos incompletos o sesión inválida");
         exit();
     }
     
-    $apartamento = new Apartamento("",$numero,"","");
+    $apartamento = new Apartamento($numero,"","");
     $apartamento->consultarPorNumero();
-    if ($apartamento->getIdApartamento() !== null && $apartamento->getIdApartamento() !== "") {
+    if ($apartamento->getNumero() !== null && $apartamento->getNumero() !== "") {
         $estado = new Estado(1);
-        $cuenta = new CuentaCobro(0, $apartamento, $estado, $fecha, $valor, $idAdmin);
+        $cuenta = new CuentaCobro(0, $numero, $estado, $fecha, $valor, $idAdmin);
         
         $cobroDAO = new CobroDAO(
             $cuenta->getId(),
-            $cuenta->getApartamento()->getIdApartamento(),
+            $cuenta->getNumeroApartamento(),
             $cuenta->getEstado()->getIdEstado(),
             $cuenta->getFechaGeneracion(),
             $cuenta->getValor(),
