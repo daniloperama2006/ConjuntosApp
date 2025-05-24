@@ -1,30 +1,35 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img width="55" height="55" src="https://img.icons8.com/bubbles/100/building.png" alt="building"/>
+        <!-- Logo + Nombre App -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/city-buildings.png" alt="building" width="40" height="40" class="me-2">
+            <span class="fs-5 fw-bold">ConjuntosApp</span>
         </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div>
-            <p class="text-white mb-0">
-                <?php
-                $id = $_SESSION["id"];
-                $admin = new Admin($id);
-                $admin->consultar();
-                echo "Administrador: " . $admin->getNombre() . " " . $admin->getApellido();
-                ?>
-            </p>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+				
+				<!-- Nombre Admin a la derecha -->
+                <li class="nav-item ms-3">
+                    <span class="text-white">
+                        <?php
+                        $id = $_SESSION["id"];
+                        $_SESSION["rol"] = "admin";
+                        $admin = new Admin($id);
+                        $admin->consultar();
+                        echo "<span class='text'>Administrador:</span> <span class='fw-bold'>" . $admin->getNombre() . " " . $admin->getApellido() . "</span>";
+                        ?>
+                    </span>
+                </li>
+                
+                <!-- Opciones de navegación -->
                 <li class="nav-item">
                     <a class="nav-link" href="?pid=<?php echo base64_encode('presentacion/admin/crearCuenta.php'); ?>">Crear Cuenta</a>
                 </li>
@@ -55,9 +60,12 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="?pid=<?php echo base64_encode('presentacion/cerrarSesion.php') ?>" class="nav-link">Cerrar sesión</a>
+                <li class="nav-item ms-3">
+                    <a href="?pid=<?php echo base64_encode('presentacion/cerrarSesion.php') ?>" class="btn btn-danger">
+                        Cerrar sesión
+                    </a>
                 </li>
+                
             </ul>
         </div>
     </div>

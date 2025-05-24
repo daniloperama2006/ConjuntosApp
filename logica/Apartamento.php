@@ -91,5 +91,38 @@ class Apartamento {
         $conexion->cerrar();
         return $apartamentos;
     }
+    
+    public function consultarApartamentoPorPropietario() {
+        $dao = new ApartDAO($this->numero, $this->idPropietario);
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $resultado = $conexion->ejecutar($dao->consultarPorNumeroYPropietario());
+        $apartamentos = [];
+        while ($registro = $conexion->registro($resultado)) {
+            $apartamentos[] = [
+                "numero" => $registro[0],
+                "created_at" => $registro[1]
+            ];
+        }
+        $conexion->cerrar();
+        return $apartamentos;
+    }
+    
+    public function consultarTodosPorPropietario() {
+        $dao = new ApartDAO(null, $this->idPropietario);
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $resultado = $conexion->ejecutar($dao->consultarTodosPorPropietario());
+        $apartamentos = [];
+        while ($registro = $conexion->registro($resultado)) {
+            $apartamentos[] = [
+                "numero" => $registro[0],
+                "created_at" => $registro[1]
+            ];
+        }
+        $conexion->cerrar();
+        return $apartamentos;
+    }
+    
 }
 ?>

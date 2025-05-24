@@ -37,5 +37,18 @@ class ApartDAO {
                 FROM apartamento a
                 JOIN propietario p ON a.id_propietario = p.id";
     }
+    
+    public function consultarPorNumeroYPropietario() {
+        return "SELECT a.numero, a.created_at
+            FROM apartamento a
+            WHERE a.id_propietario = {$this->id_propietario}
+            AND a.numero = {$this->numero}";
+    }
+    
+    public function consultarTodosPorPropietario() {
+        return "SELECT a.numero, a.created_at
+            FROM apartamento a
+            WHERE a.id_propietario = {$this->id_propietario}";
+    }
 }
 ?>
