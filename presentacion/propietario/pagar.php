@@ -10,11 +10,6 @@ include_once("persistencia/Conexion.php");
 include_once("logica/Pago.php");
 include_once("persistencia/PagoDAO.php");
 
-if (!isset($_SESSION["id"])) {
-    echo "<p>Error: Sesión no iniciada.</p>";
-    exit;
-}
-
 $msg = null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
