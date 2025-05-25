@@ -38,5 +38,21 @@ class PagoDAO {
                 WHERE a.id_propietario = {$idPropietario}";
         }
     
+        public function consultarPagoTotal($numero){
+            return"SELECT 
+                COALESCE(SUM(p.monto_pagado), 0) AS total_pagos
+                FROM 
+                    pago p
+                WHERE 
+                    p.id_cuenta IN (
+                        SELECT cc.id_cuenta
+                        FROM cuenta_cobro cc
+                        WHERE cc.numero_apartamento = {$numero}
+                )";
+        }
+        
+        public function consultarPagoPorCuenta($numero){
+            return"";
+        }
 }
 ?>

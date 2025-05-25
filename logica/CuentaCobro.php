@@ -143,6 +143,18 @@ class CuentaCobro {
         return $cuentas;
     }
     
+    public function consultarSaldoPendiente($numeroApartamento) {
+        $conexion = new Conexion();
+        $cuentaDAO = new CobroDAO();
+        $conexion->abrir();
+        $conexion->ejecutar($cuentaDAO->consultarSaldoPendiente($numeroApartamento));
+        
+        $dato = $conexion->registro();
+        $conexion->cerrar();
+        return $dato;
+    }
+    
+    
 
 }
 

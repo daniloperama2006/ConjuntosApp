@@ -76,6 +76,16 @@ class Pago {
         return $pagos;
     }
     
+    public function consultarPagoTotal($numeroApartamento) {
+        $conexion = new Conexion();
+        $dao = new PagoDAO();
+        $conexion->abrir();
+        $conexion->ejecutar($dao->consultarPagoTotal($numeroApartamento));
+        $registro = $conexion->registro();  
+        $conexion->cerrar();
+        return $registro;
+    }
+    
     
 }
 

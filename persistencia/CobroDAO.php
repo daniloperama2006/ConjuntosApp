@@ -98,6 +98,17 @@ class CobroDAO {
     ";
     }
     
+    public function consultarSaldoPendiente($numero){
+        return"SELECT 
+                COALESCE((SELECT SUM(cc.valor) FROM cuenta_cobro cc WHERE cc.numero_apartamento = {$numero}), 0)
+                -
+                COALESCE((SELECT SUM(p.monto_pagado) 
+                          FROM pago p 
+                          WHERE p.id_cuenta IN (
+                              SELECT cc.id_cuenta FROM cuenta_cobro cc WHERE cc.numero_apartamento = {$numero}
+                          )
+                ), 0) AS saldo_pendiente";
+    }
     
     
 }
