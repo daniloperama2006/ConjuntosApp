@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $deudaTotal = $cuenta->consultarSaldoPendiente($numeroApart->getNumero());
     $pagoTotal = $pago->consultarPagoTotal($numeroApart->getNumero());
     $pagoTotalPorCuenta = $pago->consultarPagoTotal($numeroApart->getNumero(),$idCuenta);
-    
     $pago1 = $pago->consultarPagoEspecifico($numeroApart->getNumero(),$idCuenta);
     $deudaCuenta = $valor - $pago1[0];
     
@@ -110,10 +109,8 @@ if (isset($_GET['idCuenta'])) {
     $numeroApart = $cuenta->getNumeroApartamento();
     $deudaTotal = $cuenta->consultarSaldoPendiente($numeroApart->getNumero());
     $pagoTotal = $pago->consultarPagoTotal($numeroApart->getNumero());
-    
     $pago1 = $pago->consultarPagoEspecifico($numeroApart->getNumero(),$idCuenta);
     $deudaCuenta = $valor - $pago1[0];
-    
     $num1 = $pagoTotal[0] ?? 0;
     $num2 = $deudaTotal[0] ?? 0;
 } else {

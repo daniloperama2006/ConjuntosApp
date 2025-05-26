@@ -1,5 +1,13 @@
 <body class="bg-light">
 <?php include("presentacion/encabezadoAdmin.php")?>
+<?php
+    require_once 'logica/Apartamento.php';
+    $apartamento = new Apartamento();
+    $totalApartamentos = count($apartamento->consultarTodos());
+    $administracionTotal = 5000000;
+    $valorEstimado = $totalApartamentos > 0 ? round($administracionTotal / $totalApartamentos) : 0;
+?>
+
 <main class="container my-5">
     <div class="row g-4">
 
@@ -8,6 +16,7 @@
                 <div class="card-header bg-info text-white">
                     <h5 class="mb-0">Generar Nueva Cuenta de Cobro</h5>
                 </div>
+                
                 <div class="card-body">
                     <form id="formGenerarCobro" method="post" action="index.php?pid=<?php echo base64_encode("presentacion/admin/procesarCuenta.php"); ?>">
                     <?php if (isset($_GET['mensaje'])) { ?>
@@ -23,23 +32,21 @@
                             </div>
                         </div>
                     <?php } ?>
-    
-                    <div class="mb-3">
+                        <div class="mb-3">
+                                <div class="mb-3">
+                                    <label for="inputNumero" class="form-label">Número de Apartamento</label>
+                                    <input id="inputNumero" name="numero" type="text" class="form-control" required>
+                                </div>
                             <div class="mb-3">
-                                <label for="inputNumero" class="form-label">Número de Apartamento</label>
-                                <input id="inputNumero" name="numero" type="text" class="form-control" required>
-                            </div>                   
-
+                                <label for="inputFecha" class="form-label">Fecha de Generación</label>
+                                <input id="inputFecha" name="fecha" type="date" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Valor</label>
+    								<input id="inputValor" name="valor" type="number" step="0.01" class="form-control" value="<?php echo $valorEstimado; ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Crear Cuenta</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputFecha" class="form-label">Fecha de Generación</label>
-                            <input id="inputFecha" name="fecha" type="date" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputValor" class="form-label">Valor</label>
-                            <input id="inputValor" name="valor" type="number" step="0.01" class="form-control" placeholder="0.00">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Crear Cuenta</button>
                     </form>
                 </div>
             </div>
