@@ -116,12 +116,12 @@ class CuentaCobro {
         }
     }
 
-    public function consultarPorApartamento($numeroApartamento) {
+    public function consultarPorApartamento($numeroApartamento,$idPropietario) {
         $conexion = new Conexion();
         $cuentaDAO = new CobroDAO();
         $conexion->abrir();
         
-        $conexion->ejecutar($cuentaDAO->consultarCuentasPorApartamento($numeroApartamento));
+        $conexion->ejecutar($cuentaDAO->consultarCuentasPorApartamento($numeroApartamento,$idPropietario));
         
         $cuentas = array();
         while (($datos = $conexion->registro()) != null) {

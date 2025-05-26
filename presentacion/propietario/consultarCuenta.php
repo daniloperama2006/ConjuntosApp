@@ -36,7 +36,7 @@
 
             if ($accion == "buscar" && !empty($_GET['numeroApartamento'])) {
                 $numero = (int)$_GET['numeroApartamento'];
-                $resultados = $cuentaCobro->consultarPorApartamento($numero);
+                $resultados = $cuentaCobro->consultarPorApartamento($numero,$idPropietario);
             } elseif ($accion == "todos") {
                 $resultados = $cuentaCobro->consultarPorPropietario($idPropietario);
             }
@@ -89,6 +89,7 @@
             } else {
                 echo "<div class='alert alert-warning'>No se encontraron resultados.</div>";
             }
+            
         }
         ?>
 

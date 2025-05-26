@@ -75,7 +75,7 @@ class CobroDAO {
     ";
     }
     
-    public function consultarCuentasPorApartamento($numeroApartamento) {
+    public function consultarCuentasPorApartamento($numeroApartamento,$idPropietario) {
         return "
         SELECT
             cc.id_cuenta,
@@ -92,7 +92,7 @@ class CobroDAO {
             JOIN propietario p ON a.id_propietario = p.id
             JOIN estado e ON cc.id_estado = e.id_estado
         WHERE
-            cc.numero_apartamento = {$numeroApartamento}
+            cc.numero_apartamento = {$numeroApartamento} AND p.id = {$idPropietario}
         ORDER BY
             p.apellido, p.nombre, cc.numero_apartamento
     ";
