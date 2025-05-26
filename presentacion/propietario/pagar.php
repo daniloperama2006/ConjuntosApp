@@ -38,13 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $numeroApart = $cuenta->getNumeroApartamento();
     $deudaTotal = $cuenta->consultarSaldoPendiente($numeroApart->getNumero());
     $pagoTotal = $pago->consultarPagoTotal($numeroApart->getNumero());
+    $pagoTotalPorCuenta = $pago->consultarPagoTotal($numeroApart->getNumero(),$idCuenta);
+    
+    $pago1 = $pago->consultarPagoEspecifico($numeroApart->getNumero(),$idCuenta);
+    $deudaCuenta = $valor - $pago1[0];
     
     $num1 = $pagoTotal[0] ?? 0;
     $num2 = $deudaTotal[0] ?? 0;
     
     // Verificar si el monto es mayor que el saldo pendiente
-    if ($monto > $num2) {
-        $msg = "Error: El monto a pagar no puede ser mayor que el saldo pendiente.";
+    if ($monto > $deudaCuenta) {
+        $msg = "Error: El monto a pagar no puede ser mayor que la deuda de la cuenta.";
         $showModal = false;  // No mostrar modal de éxito si hay error
     } else {
         // Realizar el pago si la validación es correcta
@@ -65,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $conexion->ejecutar($pagoDAO->insertarPago());
             
             // Si el monto pagado es igual al saldo pendiente, cambiar estado
-            if ($monto == $num2) {
+            if ($monto == $deudaCuenta) {
                 // Cambiar estado de la cuenta de cobro a "Pendiente" (suponiendo que el estado "Pendiente" tiene el id 2)
                 $cuentaDAO = new CobroDAO();
                 $conexion->ejecutar($cuentaDAO->cambiarEstadoCuenta($idCuenta, 2)); // 2 sería el ID de "Pendiente"
@@ -106,6 +110,9 @@ if (isset($_GET['idCuenta'])) {
     $numeroApart = $cuenta->getNumeroApartamento();
     $deudaTotal = $cuenta->consultarSaldoPendiente($numeroApart->getNumero());
     $pagoTotal = $pago->consultarPagoTotal($numeroApart->getNumero());
+    
+    $pago1 = $pago->consultarPagoEspecifico($numeroApart->getNumero(),$idCuenta);
+    $deudaCuenta = $valor - $pago1[0];
     
     $num1 = $pagoTotal[0] ?? 0;
     $num2 = $deudaTotal[0] ?? 0;
@@ -155,8 +162,8 @@ if (isset($_GET['idCuenta'])) {
             <p><strong>Fecha:</strong> <?php echo htmlspecialchars($fecha); ?></p>
             <p><strong>Valor este mes:</strong> $<?php echo number_format($valor, 2); ?></p>
             <p><strong>Estado Actual:</strong> <?php echo htmlspecialchars($estado); ?></p>
-            <p><strong>Saldo Pendiente:</strong> $<?php echo number_format($num2); ?></p>
-
+            <p><strong>Saldo Pendiente de esta Cuenta:</strong> $<?php echo number_format($deudaCuenta); ?></p>
+            <p><strong>Saldo Pendiente Total:</strong> $<?php echo number_format($num2); ?></p>
             <form method="POST" action="">
                 <input type="hidden" name="idCuenta" value="<?php echo htmlspecialchars($idCuenta); ?>">
                 <div class="mb-3">

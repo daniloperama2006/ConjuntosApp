@@ -51,8 +51,15 @@ class PagoDAO {
                 )";
         }
         
-        public function consultarPagoPorCuenta($numero){
-            return"";
+        public function consultarPagoEspecifico($numero,$idCuenta){
+            return"		SELECT
+					    SUM(p.monto_pagado) AS total_pagado
+					FROM
+					    pago p
+					JOIN
+					    cuenta_cobro cc ON p.id_cuenta = cc.id_cuenta
+					WHERE
+					    cc.numero_apartamento = {$numero} AND p.id_cuenta = {$idCuenta}";
         }
 }
 ?>

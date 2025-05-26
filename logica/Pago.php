@@ -86,6 +86,16 @@ class Pago {
         return $registro;
     }
     
+    public function consultarPagoEspecifico($numeroApartamento,$idCuenta) {
+        $conexion = new Conexion();
+        $dao = new PagoDAO();
+        $conexion->abrir();
+        $conexion->ejecutar($dao->consultarPagoEspecifico($numeroApartamento,$idCuenta));
+        $registro = $conexion->registro();
+        $conexion->cerrar();
+        return $registro;
+    }
+    
     
 }
 
